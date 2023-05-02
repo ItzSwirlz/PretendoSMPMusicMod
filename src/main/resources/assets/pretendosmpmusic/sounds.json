@@ -1,0 +1,12 @@
+{
+  "ambient.warawaraplaza": {
+    "category": "ambient",
+    "sounds": [
+      {
+        "name": "pretendosmpmusic:ambient/warawaraplaza",
+        "volume": 1,
+        "stream": true
+      }
+    ]
+  }
+}

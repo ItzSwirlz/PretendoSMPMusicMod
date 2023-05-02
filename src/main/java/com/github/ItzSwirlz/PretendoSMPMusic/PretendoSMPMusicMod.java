@@ -2,6 +2,11 @@ package com.github.ItzSwirlz.PretendoSMPMusic;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -12,6 +17,11 @@ import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,57 +34,44 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
+import java.rmi.registry.Registry;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(PretendoSMPMusicMod.MODID)
 public class PretendoSMPMusicMod
 {
-    // Define mod id in a common place for everything to reference
-    public static final String MODID = "PretendoSMPMusicMod";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final String MODID = "pretendosmpmusic";
+
+    private static final DeferredRegister<SoundEvent> SOUNDEVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
+    public static final RegistryObject<SoundEvent> WARAWARAPLAZA = SOUNDEVENTS.register("ambient.warawaraplaza", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "ambient.warawaraplaza")));
 
     public PretendoSMPMusicMod()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        SOUNDEVENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
+    public void commonSetup(final FMLCommonSetupEvent event)
     {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
+        SOUNDEVENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    private void addCreative(CreativeModeTabEvent.BuildContents event)
-    {
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
-    }
-
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        public static void onClientStart(FMLClientSetupEvent event) {
+            SOUNDEVENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+        @SubscribeEvent
+        public static void onPlayerMove(EntityItemPickupEvent event) {
+            Minecraft.getInstance().player.playSound(WARAWARAPLAZA.get());
         }
     }
 }
