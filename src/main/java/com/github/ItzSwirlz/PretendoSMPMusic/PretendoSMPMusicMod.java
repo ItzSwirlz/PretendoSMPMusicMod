@@ -62,8 +62,18 @@ public class PretendoSMPMusicMod
                    unless the Music is being registered when trying to also start playing music. Probably because
                    of the main menu music, the game trying to play a sound that may not have been registered.
                 */
-                if(!Minecraft.getInstance().getMusicManager().isPlayingMusic(new Music(WARAWARAPLAZA.getHolder().get(), 0, 0, true))) {
-                    Minecraft.getInstance().getMusicManager().startPlaying(new Music(WARAWARAPLAZA.getHolder().get(), 0, 0, true));
+
+                /*  ------------------------------------
+                              Wara Wara Plaza
+                    ------------------------------------ */
+                if((-200.0 <= event.player.getX() && event.player.getX() <= -15.0) && (-115.0 <= event.player.getZ() && event.player.getZ() <= 150.0) && event.player.getY() >= 70) {
+                    if (!Minecraft.getInstance().getMusicManager().isPlayingMusic(new Music(WARAWARAPLAZA.getHolder().get(), 0, 0, true))) {
+                        Minecraft.getInstance().getMusicManager().startPlaying(new Music(WARAWARAPLAZA.getHolder().get(), 0, 0, true));
+                    }
+                } else {
+                    if (Minecraft.getInstance().getMusicManager().isPlayingMusic(new Music(WARAWARAPLAZA.getHolder().get(), 0, 0, true))) {
+                        Minecraft.getInstance().getMusicManager().stopPlaying();
+                    }
                 }
             }
         }

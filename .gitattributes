@@ -5,4 +5,5 @@ src/generated/**/.cache/cache text eol=lf
 src/generated/**/*.json text eol=lf
 
 # ItzSwirlz: CRLF line endings are cringe
-* text eol=lf
+#* text eol=lf
+# update: it corrupts the ogg file
