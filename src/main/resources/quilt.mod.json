@@ -1,25 +1,27 @@
 {
 	"schema_version": 1,
 	"quilt_loader": {
-		"group": "com.example",
-		"id": "example_mod",
+		"group": "com.github.ItzSwirlz.PretendoSMPMusic",
+		"id": "pretendosmpmusic",
 		"version": "${version}",
 		"metadata": {
-			"name": "Mod Name",
-			"description": "A short description of your mod.",
+			"name": "Pretendo SMP Music",
+			"description": "This mod adds music to the game for the Pretendo SMP - that is, when you are on the server, and in specific areas, different music will play!",
 			"contributors": {
-				"Your name here": "Owner"
+				"ItzSwirlz": "Developer",
+				"Quilt Developers": "Quilt",
+				"Music Makers of Nintendo": "Killer music!"
 			},
 			"contact": {
-				"homepage": "https://example.com/",
-				"issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
-				"sources": "https://github.com/QuiltMC/quilt-template-mod"
+				"homepage": "https://github.com/ItzSwirlz/PretendoSMPMusicMod",
+				"issues": "https://github.com/ItzSwirlz/PretendoSMPMusicMod/issues",
+				"sources": "https://github.com/ItzSwirlz/PretendoSMPMusicMod"
 			},
 			"icon": "assets/example_mod/icon.png"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
-			"init": "com.example.example_mod.ExampleMod"
+			"init": "com.github.ItzSwirlz.PretendoSMPMusic.PretendoSMPMusicMod"
 		},
 		"depends": [
 			{
@@ -35,6 +37,5 @@
 				"versions": ">=1.19.4"
 			}
 		]
-	},
-	"mixin": "example_mod.mixins.json"
+	}
 }
