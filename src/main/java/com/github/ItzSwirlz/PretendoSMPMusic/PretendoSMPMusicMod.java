@@ -2,6 +2,7 @@ package com.github.ItzSwirlz.PretendoSMPMusic;
 
 import com.github.ItzSwirlz.PretendoSMPMusic.soundinstance.WaraWaraPlazaSoundInstance;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.world.dimension.DimensionTypes;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.entity.event.api.client.ClientEntityTickCallback;
@@ -35,7 +36,7 @@ public class PretendoSMPMusicMod implements ModInitializer {
                 /*  ------------------------------------
                               Wara Wara Plaza
                     ------------------------------------ */
-				if(entity.isPlayer() && (-200.0 <= entity.getX() && entity.getX() <= -15.0) && (-115.0 <= entity.getZ() && entity.getZ() <= 150.0) && entity.getY() >= 70) {
+				if(entity.world.getDimensionKey().equals(DimensionTypes.OVERWORLD) && entity.isPlayer() && (-200.0 <= entity.getX() && entity.getX() <= -15.0) && (-115.0 <= entity.getZ() && entity.getZ() <= 150.0) && entity.getY() >= 70) {
 					if(!MinecraftClient.getInstance().getSoundManager().isPlaying(WARAWARAPLAZA_SOUNDINSTANCE)) {
 						MinecraftClient.getInstance().getSoundManager().play(WARAWARAPLAZA_SOUNDINSTANCE);
 					}
