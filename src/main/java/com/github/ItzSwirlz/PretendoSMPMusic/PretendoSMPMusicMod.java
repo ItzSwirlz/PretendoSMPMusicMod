@@ -1,5 +1,6 @@
 package com.github.ItzSwirlz.PretendoSMPMusic;
 
+import com.github.ItzSwirlz.PretendoSMPMusic.soundinstance.SpawnSoundInstance;
 import com.github.ItzSwirlz.PretendoSMPMusic.soundinstance.WaraWaraPlazaSoundInstance;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.world.dimension.DimensionTypes;
@@ -8,7 +9,8 @@ import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.entity.event.api.client.ClientEntityTickCallback;
 
 public class PretendoSMPMusicMod implements ModInitializer {
-	public static final WaraWaraPlazaSoundInstance WARAWARAPLAZA_SOUNDINSTANCE = new WaraWaraPlazaSoundInstance();
+	public static final WaraWaraPlazaSoundInstance WARAWARAPLAZA_SOUND_INSTANCE = new WaraWaraPlazaSoundInstance();
+	public static final SpawnSoundInstance SPAWN_SOUND_INSTANCE = new SpawnSoundInstance();
 	@Override
 	public void onInitialize(ModContainer mod) {
 		ClientEntityTickCallback.EVENT.register((entity, isPassengerTick) -> {
@@ -32,17 +34,25 @@ public class PretendoSMPMusicMod implements ModInitializer {
                    In terms of fading in and out, this will probably require
                    progressively lowering the volume of the audio.
                 */
-
-                /*  ------------------------------------
-                              Wara Wara Plaza
-                    ------------------------------------ */
-				if(entity.world.getDimensionKey().equals(DimensionTypes.OVERWORLD) && entity.isPlayer() && (-200.0 <= entity.getX() && entity.getX() <= -15.0) && (-115.0 <= entity.getZ() && entity.getZ() <= 150.0) && entity.getY() >= 70) {
-					if(!MinecraftClient.getInstance().getSoundManager().isPlaying(WARAWARAPLAZA_SOUNDINSTANCE)) {
-						MinecraftClient.getInstance().getSoundManager().play(WARAWARAPLAZA_SOUNDINSTANCE);
+				if(entity.world.getDimensionKey().equals(DimensionTypes.OVERWORLD)) {
+					if((-200.0 <= entity.getX() && entity.getX() <= -15.0) && (-115.0 <= entity.getZ() && entity.getZ() <= 150.0) && entity.getY() >= 70) {
+						if(!MinecraftClient.getInstance().getSoundManager().isPlaying(WARAWARAPLAZA_SOUND_INSTANCE)) {
+							MinecraftClient.getInstance().getSoundManager().play(WARAWARAPLAZA_SOUND_INSTANCE);
+						}
+					} else {
+						if (MinecraftClient.getInstance().getSoundManager().isPlaying(WARAWARAPLAZA_SOUND_INSTANCE)) {
+							MinecraftClient.getInstance().getSoundManager().stop(WARAWARAPLAZA_SOUND_INSTANCE);
+						}
 					}
-				} else {
-					if (MinecraftClient.getInstance().getSoundManager().isPlaying(WARAWARAPLAZA_SOUNDINSTANCE)) {
-						MinecraftClient.getInstance().getSoundManager().stop(WARAWARAPLAZA_SOUNDINSTANCE);
+
+					if(entity.squaredDistanceTo(0, 96, 0) <= 15.0 && entity.getY() >= 90.0) {
+						if (!MinecraftClient.getInstance().getSoundManager().isPlaying(SPAWN_SOUND_INSTANCE)) {
+							MinecraftClient.getInstance().getSoundManager().play(SPAWN_SOUND_INSTANCE);
+						}
+					} else {
+						if(MinecraftClient.getInstance().getSoundManager().isPlaying(SPAWN_SOUND_INSTANCE)) {
+							MinecraftClient.getInstance().getSoundManager().stop(SPAWN_SOUND_INSTANCE);
+						}
 					}
 				}
 			}

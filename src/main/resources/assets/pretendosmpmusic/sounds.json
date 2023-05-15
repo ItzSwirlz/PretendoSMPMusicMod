@@ -1,4 +1,14 @@
 {
+  "music.spawn": {
+    "category": "music",
+    "sounds": [
+      {
+        "name": "pretendosmpmusic:music/spawn",
+        "volume": 1,
+        "stream": true
+      }
+    ]
+  },
   "music.warawaraplaza": {
     "category": "music",
     "sounds": [
