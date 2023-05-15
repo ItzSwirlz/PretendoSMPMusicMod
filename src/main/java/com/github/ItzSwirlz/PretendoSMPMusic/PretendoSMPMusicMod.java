@@ -45,7 +45,7 @@ public class PretendoSMPMusicMod implements ModInitializer {
 						}
 					}
 
-					if(entity.squaredDistanceTo(0, 96, 0) <= 15.0 && entity.getY() >= 90.0) {
+					if((-15.0 < entity.getX() && entity.getX() < 15.0) && (-15.0 < entity.getZ() && entity.getZ() < 15.0) && entity.getY() >= 90.0) {
 						if (!MinecraftClient.getInstance().getSoundManager().isPlaying(SPAWN_SOUND_INSTANCE)) {
 							MinecraftClient.getInstance().getSoundManager().play(SPAWN_SOUND_INSTANCE);
 						}
