@@ -35,7 +35,7 @@ public class PretendoSMPMusicMod implements ModInitializer {
                    progressively lowering the volume of the audio.
                 */
 				if(entity.world.getDimensionKey().equals(DimensionTypes.OVERWORLD)) {
-					if((-200.0 <= entity.getX() && entity.getX() <= -15.0) && (-115.0 <= entity.getZ() && entity.getZ() <= 150.0) && entity.getY() >= 70) {
+					if((-200.0 <= entity.getX() && entity.getX() <= -15.0) && (-115.0 <= entity.getZ() && entity.getZ() <= 150.0) && entity.getY() >= 85.0) {
 						if(!MinecraftClient.getInstance().getSoundManager().isPlaying(WARAWARAPLAZA_SOUND_INSTANCE)) {
 							MinecraftClient.getInstance().getSoundManager().play(WARAWARAPLAZA_SOUND_INSTANCE);
 						}
