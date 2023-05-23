@@ -17,7 +17,7 @@
 				"issues": "https://github.com/ItzSwirlz/PretendoSMPMusicMod/issues",
 				"sources": "https://github.com/ItzSwirlz/PretendoSMPMusicMod"
 			},
-			"icon": "assets/example_mod/icon.png"
+			"icon": "assets/pretendosmpmusic/pretendologo"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"entrypoints": {
